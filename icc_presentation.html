@@ -139,7 +139,7 @@ stable features in the webcam image to the same features in the orthophoto.
 <section>
 <h3>Georeferencing: example</h3>
 <img src="img/projecting.jpg" class="stretch">
-Caveats: some webcams change orientation, many objects move (benches, traffic marking)
+Caveats: some webcams change orientation, many objects such as benches, traffic marking are unsuitable as GCPs
 </section>
 
 <section>
@@ -151,10 +151,27 @@ result in large spatial errors further from the webcam
 <div class="right" style="max-width:20%">
     <img src="img/hit.png" width="150px">
 </div>
-<img src="img/indicatrix.png" class="stretch" style="margin-top:20px; text-align: left;clear: left;clear: right">
+<img src="img/indicatrix.jpg" class="stretch" style="margin-top:20px; text-align: left;clear: left;clear: right">
 </section>
 
-<!-- This is a generated file. Do not edit. -->
+
+<section data-camera="9706_2014_people" data-slidenum="10,18">
+    <h3>Pedestrian density visualization</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a>, Ehingen, Germany</small></p>
+</section>
+
+<section>
+<h3>Software</h3>
+<ul>
+    <li>Rendering: Paraview, GRASS GIS</li>
+    <li>Georeferencing: scikit-image, GRASS GIS</li>
+    <li>KDE: SciPy, Statsmodels</li>
+    <li></li>
+    <!-- </ul> -->
+
+</ul>
+    
+</section><!-- This is a generated file. Do not edit. -->
         </div>  <!-- slides -->
 
     </div>  <!-- reveal -->
@@ -286,20 +303,22 @@ Reveal.addEventListener( 'ready', function( event ) {
 } );
 
 function createSliders(slide) {
+    if (!$(slide).attr('data-camera')) {
+        return;
+    }
     var cam_number = $(slide).data('camera').split("_")[0]
     var slidenum = $(slide).data('slidenum')
     var slidenums = slidenum.split(",")
-    slide.innerHTML += '<img class="stretch" id="animimage">\n'
-    slhtml = '<div>'
-    if (slidenums[0] != -1) {
-        slhtml += '<div class="slider" id="slider1" style="background: #d2d2d2;width: 500px;margin: auto;margin-bottom: 15px"></div>'
-    }
-    if (slidenums[1] != -1) {
-        slhtml += '<div class="slider" id="slider2" style="background: #d2d2d2;width: 500px;margin: auto;margin-bottom: 15px"></div>'
-    }
-    slhtml += '</div>'
+    slhtml = `<div  style="float:left; max-width:80%">
+    <img id="animimage" width="100%" style="margin:auto"></div>
+    <div style="float:right; max-width:20%">
+    <img src="img/legend.png" width="200px">
+    <div style="font-size:70%">Isosurface <span style="font-size:50%">(people per 100 m<sup><span style="font-size:70%">2</span></sup>h)</span></div>
+    <div class="slider" id="slider1" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>
+    <div style="font-size:70%">Rotate</div>
+    <div class="slider" id="slider2" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>
+    </div>`
     slide.innerHTML += slhtml
-    slide.innerHTML += '<div><img src="img/legend.png" width="100px"></div>'
     if (slidenums[0] != -1) {
         var slider1 = slide.querySelector('#slider1');
         noUiSlider.create(slider1, {
@@ -342,7 +361,8 @@ function createSliders(slide) {
         if (slidenums[1] != -1) {
             value2 = parseInt(slider2.noUiSlider.get());
         }
-        var path = "/media/anna/Data/Projects/webcams/renderings/"
+        // var path = "/media/anna/Data/Projects/webcams/renderings/"
+        var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
         var camera = $(slide).data('camera')
         $("#animimage", slide).attr("src", path + "map_points_points_" + camera + "." + pad(value1, 4) + "." + pad(value2, 4) +".jpg");
     }
