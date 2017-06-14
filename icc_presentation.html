@@ -474,8 +474,8 @@ function createSliders(slide) {
         if (slidenums[1] != -1) {
             value2 = parseInt(slider2.noUiSlider.get());
         }
-        var path = "/media/anna/Data/Projects/webcams/renderings/"
-        //var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
+        //var path = "/media/anna/Data/Projects/webcams/renderings/"
+        var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
         var camera = $(slide).data('camera')
         $("#animimage", slide).attr("src", path + "map_points_points_" + camera + "." + pad(value1, 4) + "." + pad(value2, 4) +".jpg");
     }
