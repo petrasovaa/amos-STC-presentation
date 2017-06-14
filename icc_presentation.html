@@ -66,7 +66,8 @@ Rich source of spatio-temporal information
 <!-- especially in urban areas, different scales (multiple cameras) -->
 </section>
 
-<section data-background-image="img/amos_bg2.jpg">
+<!-- <section data-background-image="img/amos_bg2.jpg"> -->
+<section>
     <h2>AMOS</h2>
 <h5>The Archive of Many Outdoor Scenes</h5>
 <ul>
@@ -125,7 +126,7 @@ than computers, such as identifying objects in a photo or video -->
     or information from other webcams</li>
 </ul></p>
 </div>
-<div class="right" style="max-width:25%">
+<div class="right" style="max-width:22%">
     <img src="img/voxel.png" width="300px">
 </div>
 
@@ -139,7 +140,8 @@ stable features in the webcam image to the same features in the orthophoto.
 <section>
 <h3>Georeferencing: example</h3>
 <img src="img/projecting.jpg" class="stretch">
-Caveats: some webcams change orientation, many objects such as benches, traffic marking are unsuitable as GCPs
+Caveats: some webcams change orientation, many objects such as benches, traffic marking are unsuitable as GCPs, stable objects such as statues
+can move too
 </section>
 
 <section>
@@ -157,15 +159,53 @@ result in large spatial errors further from the webcam
 
 <section data-camera="9706_2014_people" data-slidenum="10,18">
     <h3>Pedestrian density visualization</h3>
-    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a>, Ehingen, Germany</small></p>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a> (July), Ehingen, Germany</small></p>
+</section>
+
+<section data-camera="10823_2014_people" data-slidenum="15,0">
+    <h3>Pedestrian density visualization</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=10823">10823</a> (July), Überlingen, Germany</small></p>
+    <!-- Lake Constance -->
+</section>
+<section data-camera="3760_2012_people" data-slidenum="9,12">
+    <h3>Effects of plaza reconstruction</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2012 (Jul - Sep), Victoria Square, Adelaide, Australia
+    </small>
+</section>
+<section data-camera="3760_2014_people" data-slidenum="9,12">
+    <h3>Effects of plaza reconstruction</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2014 (Jul - Sep), Victoria Square, Adelaide, Australia
+    </small>
+</section>
+
+<section data-camera="3760_2014_2012_people" data-slidenum="12,14">
+<h3>Change in pedestrian density (2014 minus 2012)</h3>
+     <p><small>Positive values ~ increase in density in 2014<br>
+               Negative values ~ decrease in density in 2014</small></p>
+</section>
+
+<section data-camera="3451_2014_people_vehicles" data-slidenum="-1,17">
+    <h3>High density of pedestrians and vehicles <span style="font-size: 50%">(webcam <a href="http://amos.cse.wustl.edu/camera?id=3451">3451</a>)</span></h3>
+         <p><span style="font-size: 70%"><code> if (P &gt; percentile<sup>P</sup><sub>99</sub> AND V &gt; percentile<sup>V</sup><sub>99</sub>, V + P)</span></code></p>
+</section>
+
+
+<section>
+    <h3>Challenges: webcam geometry and view</h3>
+<ul>
+    <li>areas hidden behind trees or other objects</li>
+    <li>assumes pedestrians and vehicles on a horizontal plane, otherwise we get large spatial errors</li>
+</ul>
+    <img src="img/errors2.jpg" class="stretch">
 </section>
 
 <section>
     <h3>Challenges: mTurk reliability</h3>
-<p>Traffic lights mistakenly marked as pedestrians, machine learning approaches
+<p>Traffic lights, statues mistakenly marked as pedestrians, machine learning approaches
     would avoid this type of error
     <img src="img/error.jpg">
 </section>
+
 
 <section>
 <h3>Software</h3>
@@ -186,7 +226,11 @@ result in large spatial errors further from the webcam
 </section>
 <section>
 <h3>References:</h3>
-<ul><li>Hipp, J. A., Manteiga, A., Burgess, A., Stylianou, A., Pless, R. (2016).
+<ul>
+    <li>Hipp, J. A., Adlakha, D., Gernes, R., Kargol, A., Pless, R., Drive, O. B., Louis, S. (2013).
+    Do You See What I See: Crowdsource Annotation of Captured Scenes, 24–25. 
+    <a href="http://doi.org/10.1145/2526667.2526671">http://doi.org/10.1145/2526667.2526671</a></li>
+    <li>Hipp, J. A., Manteiga, A., Burgess, A., Stylianou, A., Pless, R. (2016).
     Webcams, Crowdsourcing, and Enhanced Crosswalks: Developing a Novel Method to Analyze Active Transportation.
     Front. Public Health, 4(97). <a href="http://doi.org/10.3389/fpubh.2016.00097">http://doi.org/10.3389/fpubh.2016.00097</a>
 </li>
@@ -194,9 +238,49 @@ result in large spatial errors further from the webcam
     Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition.
     <a href="http://doi.org/10.1109/CVPR.2007.383258">http://doi.org/10.1109/CVPR.2007.383258</a></li>
 </ul>
-    
+</section>
+<section>
+    <h2>Appendix</h2>
+</section>
+<section>
+    <img src="img/appendix1.jpg">
+    <p>Reliability results for annotation of pedestrians in 720 webcam scenes.
+    <p style="font-size:50%">Hipp, J. A., Adlakha, D., Gernes, R., Kargol, A., Pless, R., Drive, O. B., Louis, S. (2013).
+    Do You See What I See: Crowdsource Annotation of Captured Scenes, 24–25. 
+    <a href="http://doi.org/10.1145/2526667.2526671">http://doi.org/10.1145/2526667.2526671</a></p> 
+</section>
+<!-- for I in `ls *9706*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
 
-</section><!-- This is a generated file. Do not edit. -->
+for I in `ls *10823*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3760_2012_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3760_2014_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+for I in `ls *3760_2014_2012_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3451_2014_people_veh*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done --><!-- This is a generated file. Do not edit. -->
         </div>  <!-- slides -->
 
     </div>  <!-- reveal -->
@@ -337,12 +421,16 @@ function createSliders(slide) {
     slhtml = `<div  style="float:left; max-width:80%">
     <img id="animimage" width="100%" style="margin:auto"></div>
     <div style="float:right; max-width:20%">
-    <img src="img/legend.png" width="200px">
-    <div style="font-size:70%">Isosurface <span style="font-size:50%">(people per 100 m<sup><span style="font-size:70%">2</span></sup>h)</span></div>
-    <div class="slider" id="slider1" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>
-    <div style="font-size:70%">Rotate</div>
-    <div class="slider" id="slider2" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>
-    </div>`
+    <img src="img/legend.png" width="200px">`
+    if (slidenums[0] != -1) {
+        slhtml += `<div style="font-size:70%">Isosurface <span style="font-size:50%">(people per 100 m<sup><span style="font-size:70%">2</span></sup>h)</span></div>
+                   <div class="slider" id="slider1" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>`
+    }
+    if (slidenums[1] != -1) {
+        slhtml += `<div style="font-size:70%">Rotate</div>
+                   <div class="slider" id="slider2" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>`
+    }
+    slhtml += '</div>'
     slide.innerHTML += slhtml
     if (slidenums[0] != -1) {
         var slider1 = slide.querySelector('#slider1');
@@ -386,8 +474,8 @@ function createSliders(slide) {
         if (slidenums[1] != -1) {
             value2 = parseInt(slider2.noUiSlider.get());
         }
-        // var path = "/media/anna/Data/Projects/webcams/renderings/"
-        var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
+        var path = "/media/anna/Data/Projects/webcams/renderings/"
+        //var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
         var camera = $(slide).data('camera')
         $("#animimage", slide).attr("src", path + "map_points_points_" + camera + "." + pad(value1, 4) + "." + pad(value2, 4) +".jpg");
     }
