@@ -112,7 +112,7 @@ than computers, such as identifying objects in a photo or video -->
 <img src="img/review_outlines.png" class="stretch">
 </section>
 <section>
-    <h3>HITs processing</h3>
+    <h3>HITs processing workflow</h3>
 <img src="img/processing.png" class="stretch">
 </section>
 
@@ -246,6 +246,24 @@ result in large spatial errors further from the webcam
 <img src="img/logos.png">
 </div>
 </section>
+
+<section>
+<h3>Conclusion &amp; Future work </h3>
+<ul class="ps">
+    <li>new method for <strong>harvesting and visualization</strong> of spatio-temporal information about active transportation</li>
+    <li>new way for cities to <strong>detect and analyze changes</strong> in active transportation behavior in an unintrusive way</li>
+    <li>georeferenced data give us the ability to <strong>incorporate other geospatial data and methods</strong> (e.g., solar radiation modeling)</li>
+    <li>possible thanks to the <strong>synergy between crowdsourcing</strong> technologies (AMOS, mTurk, open source software)</li>
+    <li><strong>machine learning</strong> techniques trained by mTurk data will enable us to analyze much <strong>larger data</strong> volume in real-time,
+        possibly leading to the discovery of more patterns</li>
+    
+</ul>
+</section>
+
+
+<section>
+    <h2>Appendix</h2>
+</section>
 <section>
 <h3>References:</h3>
 <ul>
@@ -260,9 +278,6 @@ result in large spatial errors further from the webcam
     Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition.
     <a href="http://doi.org/10.1109/CVPR.2007.383258">http://doi.org/10.1109/CVPR.2007.383258</a></li>
 </ul>
-</section>
-<section>
-    <h2>Appendix</h2>
 </section>
 <section>
     <img src="img/appendix1.jpg">
@@ -496,8 +511,8 @@ function createSliders(slide) {
         if (slidenums[1] != -1) {
             value2 = parseInt(slider2.noUiSlider.get());
         }
-        //var path = "/media/anna/Data/Projects/webcams/renderings/"
-        var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
+        var path = "/media/anna/Data/Projects/webcams/renderings/"
+        //var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
         var camera = $(slide).data('camera')
         $("#animimage", slide).attr("src", path + "map_points_points_" + camera + "." + pad(value1, 4) + "." + pad(value2, 4) +".jpg");
     }
