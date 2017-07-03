@@ -53,6 +53,11 @@ transportation patterns derived from public webcams</h3>
 <h5 style="color: #707070">Anna Petrasova, J. Aaron Hipp, Helena Mitasova</h5>
 <img height="70px" style="margin-top: 2em" src="img/cgaBlack.png">
 <h5 style="color: #000">North Carolina State University</h5>
+<aside class="notes">
+    I would like to present our work on how we took advantage of
+    crowdsourced data and crowdsourced work to analyze and
+    visualize active transportation data.
+</aside>
 </section>
 
 <section>
@@ -64,6 +69,20 @@ Rich source of spatio-temporal information
 </ul>
     <img src="img/webcam.gif" class="stretch">
 <!-- especially in urban areas, different scales (multiple cameras) -->
+<aside class="notes">
+    Public webcams is a great source of spatio-temporal information, not just for tourists to check
+    weather or traffic, but they have been used also for research in different areas.
+    For example, to observe changes in environment, or in ecology
+    when trees start to bloom.
+    Public webcams in urban areas especially is also a valuable source of information
+    about people and their transportation behavior, which is the main topic of this talk.
+    Naturally, the widespread availability of the webcams all over the world together with
+    the huge amount of data coming from each webcam every half an hour for example,
+    has made this datasource highly suitable for research in computer vision and machine learning.
+    BUT, to actually do any work with this data, there has to be a centralised archive,
+    of webcam images to facilitate the research.
+    
+</aside>
 </section>
 
 <!-- <section data-background-image="img/amos_bg2.jpg"> -->
@@ -77,6 +96,10 @@ Rich source of spatio-temporal information
     <li>online browsing of images and download available</li>
     <li>metadata and tags to improve discoverability of webcams</li>
 </ul>
+<aside class="notes">
+    In this project, we have been using AMOS, the archive...
+    
+</aside>
 </section>
 
 
@@ -106,14 +129,55 @@ How to get from image to infomation useful for analysis?<br><br>
 <!-- Amazon Mechanical Turk is based on the idea that there are 
 still many things that human beings can do much more effectively 
 than computers, such as identifying objects in a photo or video -->    
+
+<aside class="notes">
+    So now we have all those webcam images available, but how do we actually extract
+    useable, structured information?
+    Basically, we have 2 options, we can use artificial intelligence,
+    specifically machine learning methods such as neural networks,
+    or we can use people, specifically platforms such as Amazon Mechanical Turk,
+    which is also called artificial artifical intelligence, because
+    it is outsourcing some parts of a computer program to humans,
+     for those tasks can be carried out much faster by humans than computers.
+     
+     The term mechanical turk comes from a fake chess-playing machine from the late 
+     18th century.
+</aside>
 </section>
+
+
 <section>
 <h3>mTurk HITs (Human Intelligence Tasks) </h3>
 <img src="img/review_outlines.png" class="stretch">
+
+<aside class="notes">
+    We used mechanical turk to help us extract the information about people,
+    bikes, and vehicles on the webcam images.
+    Here you can see an example of the results from so called HITS, human intelligence tasks
+    looked like. The workers were asked to draw a bounding box around the people
+    so that we can get the number of people and their position on the image.
+    The same image was given to multiple workers to achieve more reliable results.
+    In a previous study my colleagues determined the number of workers needed to achieve 
+    certain level of reliability.
+</aside>
 </section>
+
+
 <section>
     <h3>HITs processing workflow</h3>
 <img src="img/processing.png" class="stretch">
+<aside class="notes">
+    This is the workflow I developed for the processing of the data from mechanical turk.
+    Colleagues from Washington University provide REST API for the collected data,
+    which I used to get the data from the HITs. The HITS have to be filtered
+    to avoid having duplicate records from those different workers. From each
+    bounding box I extracted a point representing the place where the person or vehicle
+    stands. These points are the aggregated into a space time cube representation
+    with the z axis representing time, specifically the time of a day.
+    Finally we used space-time kernel density estimation to create a smooth 3D field
+    representing the density of people or vehicles in the area.
+    
+</aside>
 </section>
 
 <section>
@@ -128,6 +192,13 @@ than computers, such as identifying objects in a photo or video -->
 </div>
 <div class="right" style="max-width:22%">
     <img src="img/voxel.png" width="300px">
+    
+<aside class="notes">
+    However, if we take the points representing people
+    as they are, we work only in the coordinate system of the image,
+    which brings many disadvatages....
+    To overcome the limitation, ...
+</aside>
 </div>
 
 
@@ -173,33 +244,80 @@ result in large spatial errors further from the webcam
     <p style="margin-top:20px; text-align: left;clear: left;clear: right">
 
     <img src="img/STC_viz.png">
+    <aside class="notes">
+        After the georeferencing, we create a 3D volume using KDE from the space-time
+        point data. For the KDE we use different spatial and temporal bandwidths.
+        The challenge is then how do we visualize this type of data so that we can analyze it
+        in an interactive way. There are 
+        several ways to do it, among the most well known and most supported in different
+        software tools are slice representation, volume rendering and isosurface.
+        Each method has of course its limitations, here we decided to
+        use the isosurface method, enhanced by coloring the isosurface for better readability.
+    </aside>
 </section>
 
 <section data-camera="9706_2014_people" data-slidenum="10,18">
     <h3>Pedestrian density visualization</h3>
     <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a> (July), Ehingen, Germany</small></p>
+    <aside class="notes">
+    Here is an example of the data and its visualization coming from a webcam in Germany.
+    This is a isosurface of a specific density value, which is colored by the time of day.
+    The vertical axis is the time of day and don't show it here as a traditional z axis,
+    but rather the isosurface itself is colored.
+    So the blue represents early morning, noon is yellow and evening is red.
+    You can see just from seeing this isosurface, that this part of the town square
+    has higher pedestrian density during the whole day, but in general there is
+    much more people in the afternoon and evening. We can further explore the
+    3D density by changing the isosurface value, so we can see clearly when and where
+    there are higher concentrations of people.
+    
+    </aside>
 </section>
 
 <section data-camera="10823_2014_people" data-slidenum="15,0">
     <h3>Pedestrian density visualization</h3>
     <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=10823">10823</a> (July), Überlingen, Germany</small></p>
     <!-- Lake Constance -->
+    <aside class="notes">
+        This is another example from Germany, specifically a place at lake Constance.
+        We can see higher density of pedestrians during most of the day, especially 
+        at the place where they sell tickets for the boat rides. When we look at lower
+        concentrations, we can see patterns suggesting during which time of the day
+        the boats come.
+    </aside>
 </section>
+
+
 <section data-camera="3760_2012_people" data-slidenum="9,12">
     <h3>Effects of plaza reconstruction</h3>
     <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2012 (Jul - Sep), Victoria Square, Adelaide, Australia
     </small>
+    <aside class="notes">
+    This is another interesting example where we able to see the effects of reconstruction
+    of a plaza, specifically Victoria Square in Australia.
+    This is the sate before the reconstruction, you can see most people
+    are in the middle part.
+    </aside>
 </section>
+
 <section data-camera="3760_2014_people" data-slidenum="9,12">
     <h3>Effects of plaza reconstruction</h3>
     <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2014 (Jul - Sep), Victoria Square, Adelaide, Australia
     </small>
+    <aside class="notes">
+    And then after 2 years, the patterns change based on the changed urban environment.
+    </aside>
 </section>
 
 <section data-camera="3760_2014_2012_people" data-slidenum="12,14">
 <h3>Change in pedestrian density (2014 minus 2012)</h3>
      <p style="font-size: 90%">Positive values ~ increase in density in 2014<br>
                Negative values ~ decrease in density in 2014</p>
+    <aside class="notes">
+    Since the Kernel Density is a continuous field, we can easily
+    subtract the density before and after and get a difference in pedestrian
+    density, where the positive values mean increase in density after the reconstruction.
+    </aside>
 </section>
 
 <!-- <section data-camera="3451_2014_people_vehicles" data-slidenum="-1,17">
@@ -210,6 +328,11 @@ result in large spatial errors further from the webcam
 <section data-camera="5599_2014_people_vehicles" data-slidenum="-1,9">
     <h3>High density of pedestrians and vehicles <span style="font-size: 50%">(webcam <a href="http://amos.cse.wustl.edu/camera?id=5599">5599</a>)</span></h3>
     <p><span style="font-size: 90%"><code> if (P &gt; percentile<sup>P</sup><sub>99</sub> AND V &gt; percentile<sup>V</sup><sub>99</sub>, V + P)</span></code></p>
+    <aside class="notes">
+    In the final example, we can use this method to analyze areas and times of day of potential
+    conflict between people and vehicles by intersecting the increased densities of
+    people and cars
+    </aside>
 </section>
 
 <section>
@@ -219,6 +342,16 @@ result in large spatial errors further from the webcam
     <li>assumes pedestrians and vehicles on a horizontal plane, otherwise we get large spatial errors</li>
 </ul>
     <img src="img/errors2.jpg" class="stretch">
+    <aside class="notes">
+        Let me discuss couple of challenges we encountered.
+        In some cases, we can't actually see part of space due trees
+        or buildings, these ares could be masked or potentially
+        if desired additional webcam could be installed.
+        
+        Also the georeferncing currently assumes all objects are on a horizontal plane,
+        which is mostly true, but there are cases such as here where the people on
+        the boat are actually higher, which causes error in their transformed positions.
+    </aside>
 </section>
 
 <section>
@@ -226,6 +359,14 @@ result in large spatial errors further from the webcam
 <p>Traffic lights, statues mistakenly marked as pedestrians, machine learning approaches
     would avoid this type of error
     <img src="img/error.jpg">
+    <aside class="notes">
+        Coming back to the reliability
+        of the mechanical turk data, we saw some repeated mistakes, where many
+        workers mistakenly marked traffic lights as people, this kind of artifact
+        can be identified as a kind streak in the georefernced data.
+        This is a good example of error a machine learning would avoid, because
+        the traffic light is a stable feature in each image.
+    </aside>
 </section>
 
 
@@ -245,6 +386,13 @@ result in large spatial errors further from the webcam
 <div class="right" style="max-width:30%">
 <img src="img/logos.png">
 </div>
+<aside class="notes">
+    For this analysis, I used couple different software packages and libraries
+    glued together using Python and the whole procedure is automated
+    so processing a new camera is very easy, with the exception of finding the GCPs
+    for the georeferencing.
+    You can find the scripts on my github.
+</aside>
 </section>
 
 <section>
@@ -258,6 +406,21 @@ result in large spatial errors further from the webcam
         possibly leading to the discovery of more patterns</li>
     
 </ul>
+<aside class="notes">
+    The presented methodology shows an effective way
+    to harvest and visualize active transportation data
+    and could be used actively by cities to detect and analyze changes in active
+    transportation behavior in a cheap and nonintrusive way.
+    With the georeferncing step we can incorporate other geospatial data and methods,
+    for example we were thinking of using solar radiation modeling to see how
+    the shades influence people's behavior.
+    This research was possible thanks to the synergy between the different crowdsourcing
+    technologies and platforms including AMOS, mechanical Turk, and open source software.
+    Finally, the current and future research is focused on using the mechanical turk
+    data as a training set for machine learning techniques, which would
+    ultimately allow us to process the entire database of images, and would reveal
+    many more spatio-temporal patterns in the data.
+</aside>
 </section>
 
 
