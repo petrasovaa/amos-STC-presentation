@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<!-- This is a generated file. Do not edit. -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>FOSS4G 2017 presentation</title>
+
+        <meta name="description" content="Slides for FOSS4G 2017 presentation">
+        <meta name="author" content="Vaclav Petras">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/ncsu-geoforall-lab.css" id="theme">
+        <link rel="stylesheet" href="css/nouislider.css" id="slide">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- For chalkboard plugin -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+<section>
+<h4 style="color: #707070">FOSS4G 2017</h4>
+<h3 style="margin-top: 0.0em;color: #000">
+    Visualization and analysis of active transportation patterns derived from public webcams</h3>
+<h5 style="color: #707070">Anna Petrasova, J. Aaron Hipp, Helena Mitasova</h5>
+<img height="70px" style="margin-top: 2em" src="img/cgaBlack.png">
+<h5 style="color: #000">North Carolina State University</h5>
+<aside class="notes">
+    I would like to present our work on how we took advantage of
+    crowdsourced data and crowdsourced work to analyze and
+    visualize active transportation data.
+</aside>
+</section>
+
+<section>
+<h3>Public webcams</h3>
+Rich source of spatio-temporal information
+<ul>
+    <li>weather, traffic, changes in environment, phenology, ...</li>
+    <li>active transportation behavior in urban areas</li>
+</ul>
+    <img src="img/webcam.gif" class="stretch">
+<!-- especially in urban areas, different scales (multiple cameras) -->
+<aside class="notes">
+    Public webcams is a great source of spatio-temporal information, not just for tourists to check
+    weather or traffic, but they have been used also for research in different areas.
+    For example, to observe changes in environment, or in ecology
+    when trees start to bloom.
+    Public webcams in urban areas especially is also a valuable source of information
+    about people and their transportation behavior, which is the main topic of this talk.
+    Naturally, the widespread availability of the webcams all over the world together with
+    the huge amount of data coming from each webcam every half an hour for example,
+    has made this datasource highly suitable for research in computer vision and machine learning.
+    BUT, to actually do any work with this data, there has to be a centralised archive,
+    of webcam images to facilitate the research.
+    
+</aside>
+</section>
+
+<!-- <section data-background-image="img/amos_bg2.jpg"> -->
+<section>
+    <h2>AMOS</h2>
+<h5>The Archive of Many Outdoor Scenes</h5>
+<ul>
+    <li>collection of long-term timelapse imagery from publicly accessible outdoor webcams around the world</li>
+    <li>1,128,087,180 images taken from 29945 webcams</li>
+    <li>a project of the Media and Machines Lab Washington University in St. Louis</li>
+    <li>online browsing of images and download available</li>
+    <li>metadata and tags to improve discoverability of webcams</li>
+</ul>
+<aside class="notes">
+    In this project, we have been using AMOS, the archive...
+    
+</aside>
+</section>
+
+
+<section>
+    <h3>From image to information</h3>
+How to get from image to information useful for analysis?<br><br>
+<div class="left">
+    <p><b>Artificial intelligence</b></p>
+    <ul>
+        <li>machine learning</li>
+        <li>neural networks</li>
+        <a href="https://xkcd.com/1838/">
+            <img src="img/machine_learning.png" width="350px"></a>
+        <p style="font-size: 60%;margin-top: 0px"><a href="https://xkcd.com/1838/">https://xkcd.com/1838</a></p>
+    </ul>
+</div>
+<div class="right">
+    <p><b>Artficial artficial intelligence</b></p>
+    <ul>
+        <li>Amazon Mechanical Turk</li>
+        <li>crowdsourcing marketplace platform</li>
+        <img src="img/mturk.jpg" width="300px" style="margin-bottom:0px">
+        <p style="font-size: 60%;margin-top: 0px">fake chess-playing machine (late 18th century)</p>
+    </ul>
+</div>
+
+<!-- Amazon Mechanical Turk is based on the idea that there are 
+still many things that human beings can do much more effectively 
+than computers, such as identifying objects in a photo or video -->    
+
+<aside class="notes">
+    So now we have all those webcam images available, but how do we actually extract
+    useable, structured information?
+    Basically, we have 2 options, we can use artificial intelligence,
+    specifically machine learning methods such as neural networks,
+    or we can use people, specifically platforms such as Amazon Mechanical Turk,
+    which is also called artificial artifical intelligence, because
+    it is outsourcing some parts of a computer program to humans,
+     for those tasks can be carried out much faster by humans than computers.
+     
+     The term mechanical turk comes from a fake chess-playing machine from the late 
+     18th century.
+</aside>
+</section>
+
+
+<section>
+<h3>mTurk HITs (Human Intelligence Tasks) </h3>
+<img src="img/review_outlines.png" class="stretch">
+
+<aside class="notes">
+    We used mechanical turk to help us extract the information about people,
+    bikes, and vehicles on the webcam images.
+    Here you can see an example of the results from so called HITS, human intelligence tasks
+    looked like. The workers were asked to draw a bounding box around the people
+    so that we can get the number of people and their position on the image.
+    The same image was given to multiple workers to achieve more reliable results.
+    In a previous study my colleagues determined the number of workers needed to achieve 
+    certain level of reliability.
+</aside>
+</section>
+
+
+<section>
+    <h3>HITs processing workflow</h3>
+<img src="img/processing.png" class="stretch">
+<aside class="notes">
+    This is the workflow I developed for the processing of the data from mechanical turk.
+    Colleagues from Washington University provide REST API for the collected data,
+    which I used to get the data from the HITs. The HITS have to be filtered
+    to avoid having duplicate records from those different workers. From each
+    bounding box I extracted a point representing the place where the person or vehicle
+    stands. These points are the aggregated into a space time cube representation
+    with the z axis representing time, specifically the time of a day.
+    Finally we used space-time kernel density estimation to create a smooth 3D field
+    representing the density of people or vehicles in the area.
+    
+</aside>
+</section>
+
+<section>
+<h3>Georeferencing</h3>
+<p style="text-align: left"> Using coordinate system of the webcam image:
+<div class="left" style="max-width:75%">
+<ul>
+    <li>distances in the image represent varying distances in reality</li>
+    <li>we can't integrate other geospatial datasets (streets, POIs)
+    or information from other webcams</li>
+</ul></p>
+</div>
+<div class="right" style="max-width:22%">
+    <img src="img/voxel.png" width="300px">
+    
+<aside class="notes">
+    However, if we take the points representing people
+    as they are, we work only in the coordinate system of the image,
+    which brings many disadvatages....
+    To overcome the limitation, ...
+</aside>
+</div>
+
+
+<p style="margin-top:20px; margin-bottom:20px; text-align: left;clear: left;clear: right">
+Solution is to compute <b>projective transformation</b> by matching 4+
+stable features in the webcam image to the same features in the orthophoto.
+<img src="img/projected_checkerboard.png", class="stretch"></p>
+</section>
+
+<section>
+<h3>Georeferencing: example</h3>
+<img src="img/projecting.jpg" class="stretch">
+Caveats: some webcams change orientation, many objects such as benches, traffic marking are unsuitable as GCPs, stable objects such as statues
+can move too
+</section>
+
+<!-- <section>
+<h3>Distortions</h3>
+<div class="left" style="max-width:80%">
+Small errors in the mTurk outlines
+result in large spatial errors further from the webcam
+</div>
+<div class="right" style="max-width:20%">
+    <img src="img/hit.png" width="150px">
+</div>
+<img src="img/indicatrix.jpg" class="stretch" style="margin-top:20px; text-align: left;clear: left;clear: right">
+</section> -->
+
+<section>
+    <h3>STC visualization</h3>
+    <div class="right" style="max-width:75%">
+        <p>Space-time density of pedestrians represented as a 3D volume,
+            computed using multivariate Kernel Density Estimation (KDE) with different spatial and temporal bandwidths
+    <!-- <ul>
+        <li>mapping observations (x, y, t) space-time kernel density estimation (STKDE)  maps a volume of disease intensity along the space-time domain</li>
+    </ul> -->
+    </div>
+    <div class="left" style="max-width:22%">
+    <img src="img/STC.png" width="200px">
+    </div>
+
+
+    <p style="margin-top:20px; text-align: left;clear: left;clear: right">
+
+    <img src="img/STC_viz.png">
+    <aside class="notes">
+        After the georeferencing, we create a 3D volume using KDE from the space-time
+        point data. For the KDE we use different spatial and temporal bandwidths.
+        The challenge is then how do we visualize this type of data so that we can analyze it
+        in an interactive way. There are 
+        several ways to do it, among the most well known and most supported in different
+        software tools are slice representation, volume rendering and isosurface.
+        Each method has of course its limitations, here we decided to
+        use the isosurface method, enhanced by coloring the isosurface for better readability.
+    </aside>
+</section>
+
+<section data-camera="9706_2014_people" data-slidenum="10,18">
+    <h3>Pedestrian density visualization</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a> (July), Ehingen, Germany</small></p>
+    <aside class="notes">
+    Here is an example of the data and its visualization coming from a webcam in Germany.
+    This is a isosurface of a specific density value, which is colored by the time of day.
+    The vertical axis is the time of day and don't show it here as a traditional z axis,
+    but rather the isosurface itself is colored.
+    So the blue represents early morning, noon is yellow and evening is red.
+    You can see just from seeing this isosurface, that this part of the town square
+    has higher pedestrian density during the whole day, but in general there is
+    much more people in the afternoon and evening. We can further explore the
+    3D density by changing the isosurface value, so we can see clearly when and where
+    there are higher concentrations of people.
+    
+    </aside>
+</section>
+
+<!-- <section data-camera="10823_2014_people" data-slidenum="15,0">
+    <h3>Pedestrian density visualization</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=10823">10823</a> (July), Überlingen, Germany</small></p>
+    
+    <aside class="notes">
+        This is another example from Germany, specifically a place at lake Constance.
+        We can see higher density of pedestrians during most of the day, especially 
+        at the place where they sell tickets for the boat rides. When we look at lower
+        concentrations, we can see patterns suggesting during which time of the day
+        the boats come.
+    </aside>
+</section> -->
+
+
+<section data-camera="3760_2012_people" data-slidenum="9,12">
+    <h3>Effects of plaza reconstruction</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2012 (Jul - Sep), Victoria Square, Adelaide, Australia
+    </small>
+    <aside class="notes">
+    This is another interesting example where we able to see the effects of reconstruction
+    of a plaza, specifically Victoria Square in Australia.
+    This is the sate before the reconstruction, you can see most people
+    are in the middle part.
+    </aside>
+</section>
+
+<section data-camera="3760_2014_people" data-slidenum="9,12">
+    <h3>Effects of plaza reconstruction</h3>
+    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2014 (Jul - Sep), Victoria Square, Adelaide, Australia
+    </small>
+    <aside class="notes">
+    And then after 2 years, the patterns change based on the changed urban environment.
+    </aside>
+</section>
+
+<section data-camera="3760_2014_2012_people" data-slidenum="12,14">
+<h3>Change in pedestrian density (2014 minus 2012)</h3>
+     <p style="font-size: 90%">Positive values ~ increase in density in 2014<br>
+               Negative values ~ decrease in density in 2014</p>
+    <aside class="notes">
+    Since the Kernel Density is a continuous field, we can easily
+    subtract the density before and after and get a difference in pedestrian
+    density, where the positive values mean increase in density after the reconstruction.
+    </aside>
+</section>
+
+<!-- <section data-camera="3451_2014_people_vehicles" data-slidenum="-1,17">
+    <h3>High density of pedestrians and vehicles <span style="font-size: 50%">(webcam <a href="http://amos.cse.wustl.edu/camera?id=3451">3451</a>)</span></h3>
+         <p><span style="font-size: 70%"><code> if (P &gt; percentile<sup>P</sup><sub>99</sub> AND V &gt; percentile<sup>V</sup><sub>99</sub>, V + P)</span></code></p>
+</section> -->
+
+<section data-camera="5599_2014_people_vehicles" data-slidenum="-1,9">
+    <h3>High density of pedestrians and vehicles <span style="font-size: 50%">(webcam <a href="http://amos.cse.wustl.edu/camera?id=5599">5599</a>)</span></h3>
+    <p><span style="font-size: 90%"><code> if (P &gt; percentile<sup>P</sup><sub>99</sub> AND V &gt; percentile<sup>V</sup><sub>99</sub>, V + P)</span></code></p>
+    <aside class="notes">
+    In the final example, we can use this method to analyze areas and times of day of potential
+    conflict between people and vehicles by intersecting the increased densities of
+    people and cars
+    </aside>
+</section>
+
+
+<section>
+<h3>Software</h3>
+<div class="left" style="max-width:60%">
+<ul>
+    <li>Python libraries</li>
+    <li>Jupyter Notebook for data exploration</li>
+    <li>Georeferencing: scikit-image, GRASS GIS</li>
+    <li>KDE: SciPy, Statsmodels</li>
+    <li>Rendering: GRASS GIS, ParaView, Blender</li>
+</ul>
+<p>
+    <a href="https://github.com/petrasovaa/amos-visualization">github.com/petrasovaa/amos-visualization</a>
+</div>
+<div class="right" style="max-width:30%">
+<img src="img/logos.png">
+</div>
+<aside class="notes">
+    For this analysis, I used couple different software packages and libraries
+    glued together using Python and the whole procedure is automated
+    so processing a new camera is very easy, with the exception of finding the GCPs
+    for the georeferencing.
+    You can find the scripts on my github.
+</aside>
+</section>
+
+<section>
+    <h3>GRASS GIS</h3>
+<img class="stretch" src="img/GRASS_rendering.png"></img>
+</section>
+
+<section data-camera="9706_2014_people" data-slidenum="10,18">
+<h3>ParaView</h3>
+<p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a> (July), Ehingen, Germany</small></p>
+</section>
+
+<section>
+    <h3>Blender</h3>
+<img class="stretch" src="img/glass_rendering.png"></img>
+</section>
+
+<section>
+    <h3>Blender</h3>
+<img class="stretch" src="img/Blender_screenshot.jpg"></img>
+</section>
+
+<section>
+    <h3>Blend4Web</h3>
+<iframe class="stretch" src="./blend4web.html?autorotate"></iframe>
+</section>
+
+<section>
+<h3>Conclusion &amp; Future work </h3>
+<ul class="ps">
+    <li>new method for <strong>harvesting and visualization</strong> of spatio-temporal information about active transportation</li>
+    <li>new way for cities to <strong>detect and analyze changes</strong> in active transportation behavior in an unintrusive way</li>
+    <li>georeferenced data give us the ability to <strong>incorporate other geospatial data and methods</strong> (e.g., solar radiation modeling)</li>
+    <li>possible thanks to the <strong>synergy between crowdsourcing</strong> technologies (AMOS, mTurk, open source software)</li>
+    <li><strong>machine learning</strong> techniques trained by mTurk data will enable us to analyze much <strong>larger data</strong> volume in real-time,
+        possibly leading to the discovery of more patterns</li>
+    
+</ul>
+<aside class="notes">
+    The presented methodology shows an effective way
+    to harvest and visualize active transportation data
+    and could be used actively by cities to detect and analyze changes in active
+    transportation behavior in a cheap and nonintrusive way.
+    With the georeferncing step we can incorporate other geospatial data and methods,
+    for example we were thinking of using solar radiation modeling to see how
+    the shades influence people's behavior.
+    This research was possible thanks to the synergy between the different crowdsourcing
+    technologies and platforms including AMOS, mechanical Turk, and open source software.
+    Finally, the current and future research is focused on using the mechanical turk
+    data as a training set for machine learning techniques, which would
+    ultimately allow us to process the entire database of images, and would reveal
+    many more spatio-temporal patterns in the data.
+</aside>
+</section>
+
+
+<section>
+    <h2>Appendix</h2>
+</section>
+<section>
+    <h3>Challenges: webcam geometry and view</h3>
+<ul>
+    <li>areas hidden behind trees or other objects</li>
+    <li>assumes pedestrians and vehicles on a horizontal plane, otherwise we get large spatial errors</li>
+</ul>
+    <img src="img/errors2.jpg" class="stretch">
+    <aside class="notes">
+        Let me discuss couple of challenges we encountered.
+        In some cases, we can't actually see part of space due trees
+        or buildings, these ares could be masked or potentially
+        if desired additional webcam could be installed.
+        
+        Also the georeferncing currently assumes all objects are on a horizontal plane,
+        which is mostly true, but there are cases such as here where the people on
+        the boat are actually higher, which causes error in their transformed positions.
+    </aside>
+</section>
+
+<section>
+    <h3>Challenges: mTurk reliability</h3>
+<p>Traffic lights, statues mistakenly marked as pedestrians, machine learning approaches
+    would avoid this type of error
+    <img src="img/error.jpg">
+    <aside class="notes">
+        Coming back to the reliability
+        of the mechanical turk data, we saw some repeated mistakes, where many
+        workers mistakenly marked traffic lights as people, this kind of artifact
+        can be identified as a kind streak in the georefernced data.
+        This is a good example of error a machine learning would avoid, because
+        the traffic light is a stable feature in each image.
+    </aside>
+</section>
+
+<section>
+<h3>References:</h3>
+<ul>
+    <li>Hipp, J. A., Adlakha, D., Gernes, R., Kargol, A., Pless, R., Drive, O. B., Louis, S. (2013).
+    Do You See What I See: Crowdsource Annotation of Captured Scenes, 24–25. 
+    <a href="http://doi.org/10.1145/2526667.2526671">http://doi.org/10.1145/2526667.2526671</a></li>
+    <li>Hipp, J. A., Manteiga, A., Burgess, A., Stylianou, A., Pless, R. (2016).
+    Webcams, Crowdsourcing, and Enhanced Crosswalks: Developing a Novel Method to Analyze Active Transportation.
+    Front. Public Health, 4(97). <a href="http://doi.org/10.3389/fpubh.2016.00097">http://doi.org/10.3389/fpubh.2016.00097</a>
+</li>
+<li>Jacobs, N., Roman, N., Pless, R. (2007). Consistent temporal variations in many outdoor scenes.
+    Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition.
+    <a href="http://doi.org/10.1109/CVPR.2007.383258">http://doi.org/10.1109/CVPR.2007.383258</a></li>
+</ul>
+</section>
+
+<!-- for I in `ls *9706*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+for I in `ls *10823*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3760_2012_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3760_2014_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+for I in `ls *3760_2014_2012_p*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done
+
+
+for I in `ls *3451_2014_people_veh*`
+do
+scp $I akratoc@fatra.cnr.ncsu.edu:/var/www/html/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/
+done --><!-- This is a generated file. Do not edit. -->
+        </div>  <!-- slides -->
+
+    </div>  <!-- reveal -->
+    <!--
+        Home button or link to a parent page
+        If you want this to be unique for every page (slide deck),
+        then remove it from here and put it at the end of each
+        file (or series of files) creating one page
+        (the position will be little different)
+        TODO: some JS is needed to move it to the right position
+    -->
+    <div class="parent-page">
+        <!-- alternative symbol: &#x1f3e0; -->
+        <a href="https://github.com/petrasovaa/amos-STC-presentation" title="Go to the repository">
+        <img width="15px" src="img/home.svg"></a>
+    </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                // Display controls in the bottom right corner
+                controls: false,
+
+                // Display a presentation progress bar
+                progress: true,
+                
+                center: true,
+                
+                // Display the page number of the current slide
+                slideNumber: false,
+
+                // Enable the slide overview mode
+                overview: true,
+
+                // Turns fragments on and off globally
+                fragments: true,
+
+                // The "normal" size of the presentation, aspect ratio will be preserved
+                // when the presentation is scaled to fit different resolutions. Can be
+                // specified using percentage units.
+                // width: 960,
+                // height: 700,
+                
+                // Factor of the display size that should remain empty around the content
+                margin: 0.05,  // increase?
+
+                // Bounds for smallest/largest possible scale to apply to content
+                minScale: 0.5,
+                maxScale: 5.0,
+
+                theme: Reveal.getQueryHash().theme,  // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Push each slide change to the browser history
+                history: true,
+                // Enable keyboard shortcuts for navigation
+                keyboard: true,
+
+                // Vertical centering of slides
+                center: true,
+
+                // Enables touch navigation on devices with touch input
+                touch: true,
+
+                // Loop the presentation
+                loop: false,
+                // Flags if the presentation is running in an embedded mode,
+                // i.e. contained within a limited portion of the screen
+                embedded: false,
+
+                // Number of milliseconds between automatically proceeding to the
+                // next slide, disabled when set to 0, this value can be overwritten
+                // by using a data-autoslide attribute on your slides
+                autoSlide: 0,
+
+                // Stop auto-sliding after user input
+                autoSlideStoppable: true,
+
+                // Enable slide navigation via mouse wheel
+                mouseWheel: false,
+
+                // Hides the address bar on mobile devices
+                hideAddressBar: true,
+
+                // Opens links in an iframe preview overlay
+                previewLinks: false,
+
+                // Transition speed
+                transitionSpeed: 'default', // default/fast/slow
+
+                // Transition style for full page slide backgrounds
+                backgroundTransition: 'none', // default/none/slide/concave/convex/zoom
+
+                // Number of slides away from the current that are visible
+                viewDistance: 3,
+
+                // Parallax background image
+                //parallaxBackgroundImage: '', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+                // Parallax background size
+                //parallaxBackgroundSize: '' // CSS syntax, e.g. "2100px 900px"
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/math/math.js', async: true }
+                ]
+            });
+
+        </script>
+<script src="js/nouislider.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+Reveal.addEventListener( 'ready', function( event ) {
+	var nSlides = Reveal.getTotalSlides();
+    for (i = 0; i < nSlides; i++) {
+        createSliders(Reveal.getSlide(i))
+    }
+    
+} );
+
+function createSliders(slide) {
+    if (!$(slide).attr('data-camera')) {
+        return;
+    }
+    var cam_number = $(slide).data('camera').split("_")[0]
+    var slidenum = $(slide).data('slidenum')
+    var slidenums = slidenum.split(",")
+    slhtml = `<div  style="float:left; max-width:80%">
+    <img id="animimage" width="100%" style="margin:auto"></div>
+    <div style="float:right; max-width:20%">
+    <img src="img/legend.png" width="200px">`
+    if (slidenums[0] != -1) {
+        slhtml += `<div style="font-size:70%">Isosurface <span style="font-size:50%">(people per 100 m<sup><span style="font-size:70%">2</span></sup>h)</span></div>
+                   <div class="slider" id="slider1" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>`
+    }
+    if (slidenums[1] != -1) {
+        slhtml += `<div style="font-size:70%">Rotate</div>
+                   <div class="slider" id="slider2" style="background: #d2d2d2;width: 200px;margin: auto;margin-bottom: 15px"></div>`
+    }
+    slhtml += '</div>'
+    slide.innerHTML += slhtml
+    if (slidenums[0] != -1) {
+        var slider1 = slide.querySelector('#slider1');
+        noUiSlider.create(slider1, {
+        	start: [12],
+            step: 1,
+        	connect: true,
+        	range: {
+        		'min': 0,
+        		'max': 19
+        	}
+        });
+        slider1.noUiSlider.on('slide', setImage);
+        slider1.noUiSlider.set(slidenums[0])
+    }
+    if (slidenums[1] != -1) {
+        var slider2 = slide.querySelector('#slider2');
+        noUiSlider.create(slider2, {
+            start: [0],
+            step: 1,
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 19
+            }
+        });
+        slider2.noUiSlider.on('slide', setImage);
+        slider2.noUiSlider.set(slidenums[1])
+    }
+    var animimage = slide.querySelector('#animimage')
+    
+    
+    setImage()
+    
+    function setImage(){
+        var value1 = 0
+        var value2 = 0
+        if (slidenums[0] != -1) {
+            value1 = parseInt(slider1.noUiSlider.get());
+        }
+        if (slidenums[1] != -1) {
+            value2 = parseInt(slider2.noUiSlider.get());
+        }
+        //var path = "/media/anna/Data/Projects/webcams/renderings/"
+        var path = "http://fatra.cnr.ncsu.edu/cJw9c0/nJ0qKyeeuAXuWFouqfJx0GRMVU7OZhcPfNzy9/amos/rendering/"
+        var camera = $(slide).data('camera')
+        $("#animimage", slide).attr("src", path + "map_points_points_" + camera + "." + pad(value1, 4) + "." + pad(value2, 4) +".jpg");
+    }
+}
+
+function pad(n, width) {
+  z = '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+</script>
+    </body>
+</html>
