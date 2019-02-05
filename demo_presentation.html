@@ -46,10 +46,13 @@
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
 <section>
-<h3 style="margin-top: 0.0em;color: #000">
-    Visualization and analysis of active transportation patterns derived from webcams</h3>
-<h5 style="color: #707070">Anna Petrasova, J. Aaron Hipp, Helena Mitasova</h5>
-<img height="70px" style="margin-top: 2em" src="img/cgaBlack.png">
+<!-- <h3 style="margin-top: 0.0em;color: #000"> -->
+    <!-- Visualization and analysis of active transportation patterns derived from webcams</h3> -->
+    <!-- <img src="img/webcam.gif" class="stretch"> -->
+    <iframe class="stretch" src="./blend4web.html?autorotate"></iframe>
+<h5>Anna Petrasova, J. Aaron Hipp, Helena Mitasova</h5>
+<p style="font-size: 60%;margin-top: 0px">Presented at International Cartographic Conference, manuscript in preparation</p>
+<!-- <img height="70px" style="margin-top: 2em" src="img/cgaBlack.png"> -->
 <aside class="notes">
     I would like to present our work on how we took advantage of
     crowdsourced data and crowdsourced work to analyze and
@@ -58,15 +61,15 @@
 </section>
 
 <section>
-<h3>Public webcams</h3>
+<!-- <h3>Public webcams</h3>
 Rich source of spatio-temporal information
 <ul>
     <li>weather, traffic, changes in environment, phenology, ...</li>
     <li>active transportation behavior in urban areas</li>
-</ul>
+</ul> -->
     <img src="img/webcam.gif" class="stretch">
 <!-- especially in urban areas, different scales (multiple cameras) -->
-<aside class="notes">
+ <aside class="notes">
     Public webcams is a great source of spatio-temporal information, not just for tourists to check
     weather or traffic, but they have been used also for research in different areas.
     For example, to observe changes in environment, or in ecology
@@ -83,7 +86,7 @@ Rich source of spatio-temporal information
 </section>
 
 <!-- <section data-background-image="img/amos_bg2.jpg"> -->
-<section>
+<!-- <section>
     <h2>AMOS</h2>
 <h5>The Archive of Many Outdoor Scenes</h5>
 <ul>
@@ -97,7 +100,7 @@ Rich source of spatio-temporal information
     In this project, we have been using AMOS, the archive...
 
 </aside>
-</section>
+</section> -->
 
 <!-- <section>
     <h3>From image to information</h3>
@@ -140,7 +143,7 @@ How to get from image to information useful for analysis?<br><br>
 </section>
 -->
 
-<section>
+<!-- <section>
 <h3>mTurk HITs (Human Intelligence Tasks) </h3>
 <img src="img/review_outlines.png" class="stretch">
 
@@ -154,10 +157,10 @@ How to get from image to information useful for analysis?<br><br>
     In a previous study my colleagues determined the number of workers needed to achieve
     certain level of reliability.
 </aside>
-</section>
+</section> -->
 
 
-<section>
+<!-- <section>
     <h3>HITs processing workflow</h3>
 <img src="img/processing.png" class="stretch">
 <aside class="notes">
@@ -172,7 +175,7 @@ How to get from image to information useful for analysis?<br><br>
     representing the density of people or vehicles in the area.
 
 </aside>
-</section>
+</section> -->
 <!--
 <section>
 <h3>Georeferencing</h3>
@@ -203,11 +206,12 @@ stable features in the webcam image to the same features in the orthophoto.
 </section>
 -->
 <section>
-<h3>Georeferencing</h3>
-<img src="img/projecting.jpg" class="stretch">
+<!-- <h3>Georeferencing</h3> -->
+<img src="img/webcam_to_STC.png" class="stretch">
 <!-- Caveats: some webcams change orientation, many objects such as benches, traffic marking are unsuitable as GCPs, stable objects such as statues
 can move too -->
 </section>
+
 
 <!-- <section>
 <h3>Distortions</h3>
@@ -221,15 +225,15 @@ result in large spatial errors further from the webcam
 <img src="img/indicatrix.jpg" class="stretch" style="margin-top:20px; text-align: left;clear: left;clear: right">
 </section> -->
 
-<section>
+<!-- <section>
     <h3>STC visualization</h3>
     <div class="right" style="max-width:75%">
         <p>Space-time density of pedestrians represented as a 3D volume,
-            computed using multivariate Kernel Density Estimation (KDE) with different spatial and temporal bandwidths
+            computed using multivariate Kernel Density Estimation (KDE) with different spatial and temporal bandwidths -->
     <!-- <ul>
         <li>mapping observations (x, y, t) space-time kernel density estimation (STKDE)  maps a volume of disease intensity along the space-time domain</li>
     </ul> -->
-    </div>
+    <!-- </div>
     <div class="left" style="max-width:22%">
     <img src="img/STC.png" width="200px">
     </div>
@@ -248,9 +252,9 @@ result in large spatial errors further from the webcam
         Each method has of course its limitations, here we decided to
         use the isosurface method, enhanced by coloring the isosurface for better readability.
     </aside>
-</section>
+</section> -->
 
-<section data-camera="9706_2014_people" data-slidenum="10,18">
+<!-- <section data-camera="9706_2014_people" data-slidenum="10,18">
     <h3>Pedestrian density visualization</h3>
     <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=9706">9706</a> (July), Ehingen, Germany</small></p>
     <aside class="notes">
@@ -266,7 +270,7 @@ result in large spatial errors further from the webcam
     there are higher concentrations of people.
 
     </aside>
-</section>
+</section> -->
 
 <!-- <section data-camera="10823_2014_people" data-slidenum="15,0">
     <h3>Pedestrian density visualization</h3>
@@ -283,8 +287,8 @@ result in large spatial errors further from the webcam
 
 
 <section data-camera="3760_2012_people" data-slidenum="9,12">
-    <h3>Effects of plaza reconstruction</h3>
-    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2012 (Jul - Sep), Victoria Square, Adelaide, Australia
+    <!-- <h3>Effects of plaza reconstruction</h3> -->
+    <p><small> July to Sep 2012, Victoria Square, Adelaide, Australia
     </small>
     <aside class="notes">
     This is another interesting example where we able to see the effects of reconstruction
@@ -295,8 +299,8 @@ result in large spatial errors further from the webcam
 </section>
 
 <section data-camera="3760_2014_people" data-slidenum="9,12">
-    <h3>Effects of plaza reconstruction</h3>
-    <p><small>webcam <a href="http://amos.cse.wustl.edu/camera?id=3760">3760</a> in 2014 (Jul - Sep), Victoria Square, Adelaide, Australia
+    <!-- <h3>Effects of plaza reconstruction</h3> -->
+    <p><small>Jul to Sep 2014, Victoria Square, Adelaide, Australia
     </small>
     <aside class="notes">
     And then after 2 years, the patterns change based on the changed urban environment.
@@ -330,11 +334,11 @@ result in large spatial errors further from the webcam
 </section> -->
 
 
-<section>
-    <h3>Visualization: Blend4Web</h3>
-<iframe class="stretch" src="./blend4web.html?autorotate"></iframe>
+<!-- <section> -->
+    <!-- <h3>Visualization: Blend4Web</h3> -->
+<!-- <iframe class="stretch" src="./blend4web.html?autorotate"></iframe> -->
 <!-- <img class="stretch" src="img/blend4web.jpg"></img> -->
-</section>
+<!-- </section> -->
 
 <!-- <section>
 <h3>Conclusion &amp; Future work </h3>
